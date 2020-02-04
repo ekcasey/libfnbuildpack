@@ -171,7 +171,7 @@ func (tc *Testcase) stopFunctionContainer(t *testing.T, docker *exec.Cmd) {
 func (tc *Testcase) startServer(t *testing.T, fnImg string) (int32, *exec.Cmd) {
 	localPort := 1024 + rand.Int31n(65535-1024)
 	var docker *exec.Cmd
-	docker, err := tc.startCmd("docker", "run", "-p", fmt.Sprintf("%d:8080", localPort), fnImg)
+	docker, err := tc.startCmd("docker", "run", "-m", "1G", "-p", fmt.Sprintf("%d:8080", localPort), fnImg)
 	if err != nil {
 		t.Fatalf("could not run built function: %v", err)
 	}
